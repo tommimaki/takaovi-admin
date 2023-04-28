@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input,
+textarea {
+  @apply border border-green-900 rounded-md px-1 mb-2;
+}
+/* input:focus {
+  @apply border-green-500;
+} */
+
+.linkAddButton {
+  @apply bg-green-600 text-white p-2 border-2 shadow-md border-green-900 rounded-md;
+}
+h1 {
+  @apply text-green-900 text-xl;
+}
+label {
+  @apply text-green-950;
+}
