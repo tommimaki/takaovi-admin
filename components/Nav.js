@@ -6,7 +6,6 @@ export default function Nav() {
   const activeLink = inactiveLink + " bg-gray-800 shadow-lg rounded-l-lg";
 
   const router = useRouter();
-  console.log(router);
   const { pathname } = router;
   return (
     <aside className="text-white p-4 pr-0">

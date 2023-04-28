@@ -19,3 +19,14 @@ h1 {
 label {
   @apply text-green-950;
 }
+
+table.basic {
+  @apply w-full;
+}
+table.basic thead {
+  @apply bg-slate-800 text-white text-xl;
+}
+
+table.basic tr td {
+  @apply border border-green-700 p-2 mt-10;
+}
