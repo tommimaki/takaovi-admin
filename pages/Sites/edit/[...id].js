@@ -15,12 +15,9 @@ export default function EditSitePage() {
     }
     //get info for site by id
     axios.get("/api/sitesApi?id=" + id).then((response) => {
-      console.log(response.data);
       setSiteInfo(response.data);
     });
   }, [id]);
-
-  console.log(siteInfo);
   return (
     <Layout>
       <h1 className="mb-4">Edit The Site</h1>

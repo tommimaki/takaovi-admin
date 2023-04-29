@@ -2,22 +2,24 @@ import Layout from "./Layout";
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Spinner from "./Spinner";
 
 export default function SiteForm({
   _id,
   title: currentTitle,
   description: currentDescription,
-  images,
+  images: existingImages,
 }) {
   //in edit view set the const values to existing ones, else empty
   const [title, setTitle] = useState(currentTitle || "");
   const [description, setDescription] = useState(currentDescription || "");
   const [goToSites, setGoToSites] = useState(false);
+  const [images, setImages] = useState(existingImages || []);
   const router = useRouter();
-
+  const [isUploading, setIsUploading] = useState(false);
   async function handleSubmit(event) {
     event.preventDefault();
-    const data = { title, description };
+    const data = { title, description, images };
     // if product has ID = is existing product, update it
     if (_id) {
       await axios.put("/api/sitesApi", { ...data, _id });
@@ -36,16 +38,26 @@ export default function SiteForm({
     console.log(event);
     const files = event.target?.files;
     if (files?.length > 0) {
+      setIsUploading(true);
       const data = new FormData();
       for (const file of files) {
         data.append("file", file);
       }
 
-      const res = await axios.post("/api/upload", data, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const res = await axios.post("/api/upload", data);
+      //setting existing images + new images via link that's returned when uploading
+      setImages((oldImages) => {
+        return [...oldImages, ...res.data.links];
       });
+      setIsUploading(false);
     }
   }
+
+  const deleteImage = (imageToDelete) => {
+    setImages((oldImages) => {
+      return oldImages.filter((image) => image !== imageToDelete);
+    });
+  };
 
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
@@ -58,8 +70,28 @@ export default function SiteForm({
           onChange={(ev) => setTitle(ev.target.value)}
         ></input>
         <label>Photos</label>
-        <div>
-          {!images?.length && <p> No photos yet</p>}
+        <div className="flex flex-wrap gap-2 mb-2">
+          {!!images?.length &&
+            images.map((link) => (
+              <div
+                className="inline-block rounded-lg  w-22 h-22 relative"
+                key={link}
+              >
+                <img src={link} alt="site img" className="rounded-lg w-20" />
+                <button
+                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                  onClick={() => deleteImage(link)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+
+          {isUploading && (
+            <div className="h-24 bg-green-400 p-2 flex items-center">
+              <Spinner />
+            </div>
+          )}
           <label className="flex items-center justify-center w-24 h-24 text-sm text-center gap-1 text-green-900 rounded-lg bg-gray-200 hover:bg-green-300 cursor-pointer ">
             <svg
               xmlns="http://www.w3.org/2000/svg"

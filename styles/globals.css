@@ -49,3 +49,7 @@ table.basic a {
 .btnNeutral {
   @apply bg-gray-600;
 }
+
+img {
+  max-height: 100%;
+}
