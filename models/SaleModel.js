@@ -1,9 +1,21 @@
 const { Schema, model, models } = require("mongoose");
 
+const ApartmentSchema = new Schema({
+  title: String,
+  description: String,
+  type: String,
+  area: Number,
+  floor: Number,
+  sellingPrice: Number,
+  debtFreePrice: Number,
+  maintenanceFee: Number,
+  images: [{ type: String }],
+});
 const SaleSchema = new Schema({
   title: String,
   description: String,
   images: [{ type: String }],
+  apartments: [ApartmentSchema],
 });
 
 //if exists create new

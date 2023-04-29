@@ -1,7 +1,5 @@
-import clientPromise from "@/lib/mongodb";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Sale } from "@/models/SaleModel";
-import mongoose from "mongoose";
 
 export default async function handle(req, res) {
   const { method } = req;
@@ -20,20 +18,21 @@ export default async function handle(req, res) {
   }
 
   if (method === "POST") {
-    const { title, description, images } = req.body;
+    const { title, description, images, apartments } = req.body;
     //creating Sale document in the DB
     const SaleDoc = await Sale.create({
       title,
       description,
       images,
+      apartments,
     });
     res.json(SaleDoc);
     return;
   }
 
   if (method === "PUT") {
-    const { title, description, images, _id } = req.body;
-    await Sale.updateOne({ _id }, { title, description, images });
+    const { title, description, images, _id, apartments } = req.body;
+    await Sale.updateOne({ _id }, { title, description, images, apartments });
     res.json(true);
     return;
   }
