@@ -1,6 +1,6 @@
 import clientPromise from "@/lib/mongodb";
 import { mongooseConnect } from "@/lib/mongoose";
-import { Site } from "@/models/SiteModel";
+import { Sale } from "@/models/SaleModel";
 import mongoose from "mongoose";
 
 export default async function handle(req, res) {
@@ -11,29 +11,29 @@ export default async function handle(req, res) {
   if (method === "GET") {
     //if req is from edit with id query, use findOne
     if (req.query?.id) {
-      res.json(await Site.findOne({ _id: req.query.id }));
+      res.json(await Sale.findOne({ _id: req.query.id }));
     } else {
-      //if req is from main sites listing find all
-      res.json(await Site.find());
+      //if req is from main Sales listing find all
+      res.json(await Sale.find());
     }
     return;
   }
 
   if (method === "POST") {
     const { title, description, images } = req.body;
-    //creating site document in the DB
-    const siteDoc = await Site.create({
+    //creating Sale document in the DB
+    const SaleDoc = await Sale.create({
       title,
       description,
       images,
     });
-    res.json(siteDoc);
+    res.json(SaleDoc);
     return;
   }
 
   if (method === "PUT") {
     const { title, description, images, _id } = req.body;
-    await Site.updateOne({ _id }, { title, description, images });
+    await Sale.updateOne({ _id }, { title, description, images });
     res.json(true);
     return;
   }
@@ -41,7 +41,7 @@ export default async function handle(req, res) {
   if (method === "DELETE") {
     console.log("deleting in api", req.query?.id);
     if (req.query?.id) {
-      await Site.deleteOne({ _id: req.query?.id });
+      await Sale.deleteOne({ _id: req.query?.id });
       res.json(true);
       return;
     }

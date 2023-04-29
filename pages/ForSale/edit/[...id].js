@@ -1,28 +1,28 @@
 import Layout from "@/components/Layout";
-import SiteForm from "@/components/SiteForm";
+import SaleForm from "@/components/ForSaleForm";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function EditSitePage() {
+export default function EditSalePage() {
   const router = useRouter();
   const { id } = router.query;
-  const [siteInfo, setSiteInfo] = useState(null);
+  const [SaleInfo, setSaleInfo] = useState(null);
+
   useEffect(() => {
     if (!id) {
       return;
     }
-    //get info for site by id
-    axios.get("/api/sitesApi?id=" + id).then((response) => {
-      setSiteInfo(response.data);
+    //get info for Sale by id
+    axios.get("/api/saleApi?id=" + id).then((response) => {
+      setSaleInfo(response.data);
     });
   }, [id]);
-
   return (
     <Layout>
-      <h1 className="mb-4">Edit The Site</h1>
+      <h1 className="mb-4">Edit The Sale</h1>
       {/* pass the info to the form with conditional rendering */}
-      {siteInfo && <SiteForm {...siteInfo} />}
+      {SaleInfo && <SaleForm {...SaleInfo} />}
     </Layout>
   );
 }
