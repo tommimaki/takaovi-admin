@@ -20,20 +20,52 @@ export default async function handle(req, res) {
   }
 
   if (method === "POST") {
-    const { title, description, images } = req.body;
+    const {
+      title,
+      description,
+      images,
+      location,
+      address,
+      numberOfApartments,
+      finishingDate,
+    } = req.body;
     //creating site document in the DB
     const siteDoc = await Site.create({
       title,
       description,
       images,
+      location,
+      address,
+      numberOfApartments,
+      finishingDate,
     });
     res.json(siteDoc);
     return;
   }
 
   if (method === "PUT") {
-    const { title, description, images, _id } = req.body;
-    await Site.updateOne({ _id }, { title, description, images });
+    const {
+      title,
+      description,
+      images,
+      location,
+      address,
+      numberOfApartments,
+      finishingDate,
+      _id,
+    } = req.body;
+    await Site.updateOne(
+      { _id },
+      {
+        title,
+        description,
+        images,
+        location,
+        address,
+        numberOfApartments,
+        finishingDate,
+      }
+    );
     res.json(true);
     return;
   }

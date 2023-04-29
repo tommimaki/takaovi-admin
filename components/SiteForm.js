@@ -8,18 +8,39 @@ export default function SiteForm({
   _id,
   title: currentTitle,
   description: currentDescription,
+  location: currentLocation,
+  address: currentAddress,
+  numberOfApartments: currentNumberOfApartments,
+  finishingDate: currentFinishingDate,
   images: existingImages,
 }) {
   //in edit view set the const values to existing ones, else empty
   const [title, setTitle] = useState(currentTitle || "");
   const [description, setDescription] = useState(currentDescription || "");
   const [goToSites, setGoToSites] = useState(false);
+  const [location, setLocation] = useState(currentLocation || "");
+  const [address, setAddress] = useState(currentAddress || "");
+  const [numberOfApartments, setNumberOfApartments] = useState(
+    currentNumberOfApartments || ""
+  );
+  const [finishingDate, setFinishingDate] = useState(
+    currentFinishingDate || ""
+  );
+
   const [images, setImages] = useState(existingImages || []);
   const router = useRouter();
   const [isUploading, setIsUploading] = useState(false);
   async function handleSubmit(event) {
     event.preventDefault();
-    const data = { title, description, images };
+    const data = {
+      title,
+      description,
+      images,
+      location,
+      address,
+      numberOfApartments,
+      finishingDate,
+    };
     // if product has ID = is existing product, update it
     if (_id) {
       await axios.put("/api/sitesApi", { ...data, _id });
@@ -127,6 +148,34 @@ export default function SiteForm({
             value={description}
             onChange={(ev) => setDescription(ev.target.value)}
           ></textarea>
+          <label>Location</label>
+          <input
+            type="text"
+            placeholder="Site location"
+            value={location}
+            onChange={(ev) => setLocation(ev.target.value)}
+          ></input>
+          <label>Address</label>
+          <input
+            type="text"
+            placeholder="Site address"
+            value={address}
+            onChange={(ev) => setAddress(ev.target.value)}
+          ></input>
+          <label>Number of Apartments</label>
+          <input
+            type="number"
+            placeholder="Number of apartments"
+            value={numberOfApartments}
+            onChange={(ev) => setNumberOfApartments(ev.target.value)}
+          ></input>
+          <label>Finishing Date</label>
+          <input
+            type="date"
+            placeholder="Finishing date"
+            value={finishingDate}
+            onChange={(ev) => setFinishingDate(ev.target.value)}
+          ></input>
           <button type="submit" className="linkAddButton">
             save
           </button>

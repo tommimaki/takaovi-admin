@@ -4,6 +4,10 @@ const SiteSchema = new Schema({
   title: String,
   description: String,
   images: [{ type: String }],
+  location: String,
+  address: String,
+  numberOfApartments: Number,
+  finishingDate: Date,
 });
 
 //if exists create new
