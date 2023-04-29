@@ -9,10 +9,14 @@ export default function ForSaleForm({
   description: currentDescription,
   images: existingImages,
   apartments: existingApartments,
+  location: currentLocation,
+  address: currentAddress,
 }) {
   // in edit view set the const values to existing ones, else empty
   const [title, setTitle] = useState(currentTitle || "");
   const [description, setDescription] = useState(currentDescription || "");
+  const [location, setLocation] = useState(currentLocation || "");
+  const [address, setAddress] = useState(currentAddress || "");
   const [goToProjects, setGoToProjects] = useState(false);
   const [images, setImages] = useState(existingImages || []);
   const router = useRouter();
@@ -30,7 +34,7 @@ export default function ForSaleForm({
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const data = { title, description, images, apartments };
+    const data = { title, description, images, apartments, location, address };
     console.log(data);
     // if project has ID = is existing project, update it
     if (_id) {
@@ -182,6 +186,20 @@ export default function ForSaleForm({
             value={description}
             onChange={(ev) => setDescription(ev.target.value)}
           ></textarea>
+          <label>Location</label>
+          <input
+            type="text"
+            placeholder="Helsinki"
+            value={location}
+            onChange={(ev) => setLocation(ev.target.value)}
+          ></input>
+          <label>Address</label>
+          <input
+            type="text"
+            placeholder="Kuukatu 16"
+            value={address}
+            onChange={(ev) => setAddress(ev.target.value)}
+          ></input>
 
           {apartments.map((apartment, index) => (
             <div key={index} className="flex flex-col  mb-4 border-b-2 ">

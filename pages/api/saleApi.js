@@ -25,14 +25,20 @@ export default async function handle(req, res) {
       description,
       images,
       apartments,
+      location,
+      address,
     });
     res.json(SaleDoc);
     return;
   }
 
   if (method === "PUT") {
-    const { title, description, images, _id, apartments } = req.body;
-    await Sale.updateOne({ _id }, { title, description, images, apartments });
+    const { title, description, images, _id, apartments, location, address } =
+      req.body;
+    await Sale.updateOne(
+      { _id },
+      { title, description, images, apartments, location, address }
+    );
     res.json(true);
     return;
   }

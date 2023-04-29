@@ -16,6 +16,8 @@ const SaleSchema = new Schema({
   description: String,
   images: [{ type: String }],
   apartments: [ApartmentSchema],
+  location: String,
+  address: String,
 });
 
 //if exists create new
