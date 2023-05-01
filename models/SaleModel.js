@@ -18,6 +18,9 @@ const SaleSchema = new Schema({
   apartments: [ApartmentSchema],
   location: String,
   address: String,
+  buildingType: String,
+  floors: Number,
+  numberOfApartments: Number,
 });
 
 //if exists create new

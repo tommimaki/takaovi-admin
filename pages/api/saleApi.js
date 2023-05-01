@@ -18,7 +18,17 @@ export default async function handle(req, res) {
   }
 
   if (method === "POST") {
-    const { title, description, images, apartments } = req.body;
+    const {
+      title,
+      description,
+      images,
+      apartments,
+      location,
+      address,
+      buildingType,
+      floors,
+      numberOfApartments,
+    } = req.body;
     //creating Sale document in the DB
     const SaleDoc = await Sale.create({
       title,
@@ -27,17 +37,40 @@ export default async function handle(req, res) {
       apartments,
       location,
       address,
+      buildingType,
+      floors,
+      numberOfApartments,
     });
     res.json(SaleDoc);
     return;
   }
 
   if (method === "PUT") {
-    const { title, description, images, _id, apartments, location, address } =
-      req.body;
+    const {
+      title,
+      description,
+      images,
+      _id,
+      apartments,
+      location,
+      address,
+      buildingType,
+      floors,
+      numberOfApartments,
+    } = req.body;
     await Sale.updateOne(
       { _id },
-      { title, description, images, apartments, location, address }
+      {
+        title,
+        description,
+        images,
+        apartments,
+        location,
+        address,
+        buildingType,
+        floors,
+        numberOfApartments,
+      }
     );
     res.json(true);
     return;

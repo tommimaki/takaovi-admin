@@ -11,17 +11,25 @@ export default function ForSaleForm({
   apartments: existingApartments,
   location: currentLocation,
   address: currentAddress,
+  numberOfApartments: currentNumberOfApartments,
+  floors: currentFloors,
+  buildingType: currentBuildingType,
 }) {
   // in edit view set the const values to existing ones, else empty
   const [title, setTitle] = useState(currentTitle || "");
   const [description, setDescription] = useState(currentDescription || "");
   const [location, setLocation] = useState(currentLocation || "");
   const [address, setAddress] = useState(currentAddress || "");
+  const [floors, setFloors] = useState(currentFloors || "");
   const [goToProjects, setGoToProjects] = useState(false);
   const [images, setImages] = useState(existingImages || []);
   const router = useRouter();
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadingApt, setIsUploadingApt] = useState(false);
+  const [numberOfApartments, setNumberOfApartments] = useState(
+    currentNumberOfApartments || ""
+  );
+  const [buildingType, setBuildingType] = useState(currentBuildingType || "");
   const [apartments, setApartments] = useState(existingApartments || []);
   const [openApartments, setOpenApartments] = useState({});
 
@@ -34,7 +42,17 @@ export default function ForSaleForm({
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const data = { title, description, images, apartments, location, address };
+    const data = {
+      title,
+      description,
+      images,
+      apartments,
+      location,
+      address,
+      numberOfApartments,
+      floors,
+      buildingType,
+    };
     console.log(data);
     // if project has ID = is existing project, update it
     if (_id) {
@@ -186,20 +204,55 @@ export default function ForSaleForm({
             value={description}
             onChange={(ev) => setDescription(ev.target.value)}
           ></textarea>
-          <label>Location</label>
-          <input
-            type="text"
-            placeholder="Helsinki"
-            value={location}
-            onChange={(ev) => setLocation(ev.target.value)}
-          ></input>
-          <label>Address</label>
-          <input
-            type="text"
-            placeholder="Kuukatu 16"
-            value={address}
-            onChange={(ev) => setAddress(ev.target.value)}
-          ></input>
+          <div className="flex gap-2">
+            <div className="flex flex-col">
+              <label>Location</label>
+              <input
+                type="text"
+                placeholder="Helsinki"
+                value={location}
+                onChange={(ev) => setLocation(ev.target.value)}
+              ></input>
+            </div>
+            <div className="flex flex-col">
+              <label>Address</label>
+              <input
+                type="text"
+                placeholder="Kuukatu 16"
+                value={address}
+                onChange={(ev) => setAddress(ev.target.value)}
+              ></input>
+            </div>
+            <div className="flex flex-col">
+              <label>Building Type</label>
+              <input
+                type="text"
+                placeholder="Block"
+                value={buildingType}
+                onChange={(ev) => setBuildingType(ev.target.value)}
+              ></input>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <div className="flex flex-col">
+              <label> Number Of Apartments</label>
+              <input
+                type="text"
+                placeholder="32"
+                value={numberOfApartments}
+                onChange={(ev) => setNumberOfApartments(ev.target.value)}
+              ></input>
+            </div>
+            <div className="flex flex-col">
+              <label>Floors</label>
+              <input
+                type="number"
+                placeholder="12"
+                value={floors}
+                onChange={(ev) => setFloors(ev.target.value)}
+              ></input>
+            </div>
+          </div>
 
           {apartments.map((apartment, index) => (
             <div key={index} className="flex flex-col  mb-4 border-b-2 ">
