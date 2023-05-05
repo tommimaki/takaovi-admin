@@ -1,9 +1,10 @@
 import Layout from "@/components/Layout";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const { data: session } = useSession();
-  if (!session) return;
+
   return (
     <Layout>
       <div className="flex text-gray-900  bg-neutral-300  rounded-lg p-4 justify-between">
