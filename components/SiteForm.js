@@ -43,11 +43,17 @@ export default function SiteForm({
     };
     // if product has ID = is existing product, update it
     if (_id) {
-      await axios.put("/api/sitesApi", { ...data, _id });
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${_id}`,
+        data
+      );
     } else {
-      //otherwiser create new product
-      await axios.post("/api/sitesApi", data);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites`,
+        data
+      );
     }
+
     setGoToSites(true);
   }
 
@@ -65,7 +71,10 @@ export default function SiteForm({
         data.append("file", file);
       }
 
-      const res = await axios.post("/api/upload", data);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/image-upload`,
+        data
+      );
       //setting existing images + new images via link that's returned when uploading
       setImages((oldImages) => {
         return [...oldImages, ...res.data.links];

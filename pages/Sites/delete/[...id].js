@@ -12,9 +12,11 @@ export default function DeleteSitePage() {
     if (!id) {
       return;
     }
-    axios.get("/api/sitesApi?id=" + id).then((response) => {
-      setSiteInfo(response.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${id}`)
+      .then((response) => {
+        setSiteInfo(response.data);
+      });
   }, [id]);
 
   function cancel() {
@@ -23,9 +25,12 @@ export default function DeleteSitePage() {
 
   async function deleteSite() {
     console.log("deleting, ", id);
-    await axios.delete("/api/sitesApi?id=" + id);
+    await axios.delete(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${id}`
+    );
     router.push("/Sites");
   }
+
   return (
     <Layout>
       <div className="flex flex-col min-h-full items-center justify-center">

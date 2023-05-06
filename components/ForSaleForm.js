@@ -82,7 +82,10 @@ export default function ForSaleForm({
         data.append("file", file);
       }
 
-      const res = await axios.post("/api/upload", data);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/image-upload`,
+        data
+      );
       //setting existing images + new images via link that's returned when uploading
       setImages((oldImages) => {
         return [...oldImages, ...res.data.links];
@@ -130,7 +133,10 @@ export default function ForSaleForm({
         data.append("file", file);
       }
 
-      const res = await axios.post("/api/upload", data);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/image-upload`,
+        data
+      );
       setApartments((prevApartments) =>
         prevApartments.map((apt, index) =>
           index === apartmentIndex
@@ -141,6 +147,12 @@ export default function ForSaleForm({
       setIsUploadingApt(false);
     }
   }
+
+  const deleteApartment = (apartmentIndex) => {
+    setApartments((prevApartments) =>
+      prevApartments.filter((_, index) => index !== apartmentIndex)
+    );
+  };
 
   return (
     <div>
@@ -501,6 +513,13 @@ export default function ForSaleForm({
                       />
                     </label>
                   </div>
+                  <button
+                    type="button"
+                    className="btnRed"
+                    onClick={() => deleteApartment(index)}
+                  >
+                    Delete Apartment
+                  </button>
                 </>
               )}
             </div>

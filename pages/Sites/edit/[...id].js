@@ -13,9 +13,11 @@ export default function EditSitePage() {
       return;
     }
     //get info for site by id
-    axios.get("/api/sitesApi?id=" + id).then((response) => {
-      setSiteInfo(response.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${id}`)
+      .then((response) => {
+        setSiteInfo(response.data);
+      });
   }, [id]);
 
   return (

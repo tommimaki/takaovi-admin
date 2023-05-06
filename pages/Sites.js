@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 export default function Sites() {
   const [sites, setSites] = useState([]);
   useEffect(() => {
-    axios.get("/api/sitesApi").then((response) => {
-      setSites(response.data);
-      console.log(response.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites`)
+      .then((response) => {
+        setSites(response.data);
+        console.log(response.data);
+      });
   }, []);
   return (
     <Layout>

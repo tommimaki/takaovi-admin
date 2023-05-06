@@ -12,18 +12,22 @@ export default function DeleteSalePage() {
     if (!id) {
       return;
     }
-    axios.get("/api/saleApi?id=" + id).then((response) => {
-      setSaleInfo(response.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales/${id}`)
+      .then((response) => {
+        setSaleInfo(response.data);
+      });
   }, [id]);
 
   function cancel() {
-    router.push("/Sales");
+    router.push("/ForSale");
   }
 
   async function deleteSale() {
     console.log("deleting, ", id);
-    await axios.delete("/api/saleApi?id=" + id);
+    await axios.delete(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales/${id}`
+    );
     router.push("/ForSale");
   }
   return (
