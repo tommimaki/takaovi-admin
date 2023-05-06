@@ -59,7 +59,10 @@ export default function ForSaleForm({
       await axios.put("/api/saleApi", { ...data, _id });
     } else {
       // otherwise create new project
-      await axios.post("/api/saleApi", data);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales`,
+        data
+      );
     }
 
     setGoToProjects(true);

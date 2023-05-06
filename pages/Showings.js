@@ -4,4 +4,4 @@ const {
 
 // todo
 // list customer request for showings,
-// have a status for requests, "pending, confrimed, canceled etc."
+// have a status for requests, "pending, confrimed, canceled etc. "
