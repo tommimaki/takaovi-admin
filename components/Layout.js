@@ -1,25 +1,28 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { auth } from "../firebase";
+
 import Nav from "@/components/Nav";
-import { useSession, signIn, signOut } from "next-auth/react";
-{
-  /* logged in as {session.user.email} */
-} //put in settings
+import SignIn from "@/components/SignIn";
 
 export default function Layout({ children }) {
-  // const { data: session } = useSession();
-  // if (!session) {
-  //   return (
-  //     <div className="bg-green-300 w-screen h-screen flex items-center">
-  //       <div className="text-center w-full">
-  //         <button
-  //           onClick={() => signIn("google")}
-  //           className="bg-white p-2 px-4 rounded-lg"
-  //         >
-  //           login
-  //         </button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  if (!user) {
+    return <SignIn />;
+  }
+
   return (
     <div className="min-h-screen flex bg-green-700">
       <Nav />
