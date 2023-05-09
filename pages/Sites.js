@@ -10,7 +10,6 @@ export default function Sites() {
       .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites`)
       .then((response) => {
         setSites(response.data);
-        console.log(response.data);
       });
   }, []);
   return (

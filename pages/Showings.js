@@ -4,9 +4,14 @@ import Layout from "@/components/Layout";
 
 const VisitRequests = () => {
   const [visitRequests, setVisitRequests] = useState([]);
-
+  const [userRole, setUserRole] = useState(null);
   useEffect(() => {
     fetchVisitRequests();
+  }, []);
+
+  useEffect(() => {
+    const role = localStorage.getItem("userRole");
+    setUserRole(role);
   }, []);
 
   async function fetchVisitRequests() {
@@ -33,6 +38,10 @@ const VisitRequests = () => {
   }
 
   async function handleDelete(id) {
+    if (userRole !== "admin") {
+      alert("Demo users can't remove data.");
+      return;
+    }
     try {
       await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/visit-requests/${id}`

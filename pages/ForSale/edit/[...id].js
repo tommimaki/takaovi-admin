@@ -28,7 +28,7 @@ export default function EditSalePage() {
         {" "}
         remember to click the "Save Changes" after all changes made
       </h2>
-      {/* pass the info to the form with conditional rendering */}
+      {/* passing the info to the form with conditional rendering */}
       {SaleInfo && <SaleForm {...SaleInfo} />}
     </Layout>
   );

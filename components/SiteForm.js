@@ -1,6 +1,6 @@
 import Layout from "./Layout";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Spinner from "./Spinner";
 
@@ -26,12 +26,24 @@ export default function SiteForm({
   const [finishingDate, setFinishingDate] = useState(
     currentFinishingDate || ""
   );
-
+  const [userRole, setUserRole] = useState(null);
   const [images, setImages] = useState(existingImages || []);
   const router = useRouter();
   const [isUploading, setIsUploading] = useState(false);
+
+  useEffect(() => {
+    const role = localStorage.getItem("userRole");
+    setUserRole(role);
+  }, []);
+
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
+
     const data = {
       title,
       description,
@@ -62,7 +74,10 @@ export default function SiteForm({
   }
 
   async function uploadImages(event) {
-    console.log(event);
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
     const files = event.target?.files;
     if (files?.length > 0) {
       setIsUploading(true);
@@ -84,6 +99,10 @@ export default function SiteForm({
   }
 
   const deleteImage = (imageToDelete) => {
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
     setImages((oldImages) => {
       return oldImages.filter((image) => image !== imageToDelete);
     });

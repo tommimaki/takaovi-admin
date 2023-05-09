@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Spinner from "./Spinner";
 
@@ -32,6 +32,12 @@ export default function ForSaleForm({
   const [buildingType, setBuildingType] = useState(currentBuildingType || "");
   const [apartments, setApartments] = useState(existingApartments || []);
   const [openApartments, setOpenApartments] = useState({});
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const role = localStorage.getItem("userRole");
+    setUserRole(role);
+  }, []);
 
   const toggleApartment = (index) => {
     setOpenApartments((prevOpen) => ({
@@ -42,6 +48,12 @@ export default function ForSaleForm({
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
+
     const data = {
       title,
       description,
@@ -73,7 +85,10 @@ export default function ForSaleForm({
   }
 
   async function uploadImages(event) {
-    console.log(event);
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
     const files = event.target?.files;
     if (files?.length > 0) {
       setIsUploading(true);
@@ -116,6 +131,10 @@ export default function ForSaleForm({
   };
 
   const deleteImage = (imageToDelete) => {
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
     setImages((oldImages) => {
       return oldImages.filter((image) => image !== imageToDelete);
     });
@@ -125,6 +144,10 @@ export default function ForSaleForm({
     router.back();
   };
   async function uploadApartmentImages(event, apartmentIndex) {
+    if (userRole !== "admin") {
+      alert("Demo users can't change data.");
+      return;
+    }
     const files = event.target?.files;
     if (files?.length > 0) {
       setIsUploadingApt(true);

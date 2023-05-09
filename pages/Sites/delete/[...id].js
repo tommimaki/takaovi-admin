@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Layout from "@/components/Layout";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -7,6 +8,12 @@ export default function DeleteSitePage() {
   const router = useRouter();
   const { id } = router.query;
   const [siteInfo, setSiteInfo] = useState();
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const role = localStorage.getItem("userRole");
+    setUserRole(role);
+  }, []);
 
   useEffect(() => {
     if (!id) {
@@ -33,19 +40,27 @@ export default function DeleteSitePage() {
 
   return (
     <Layout>
-      <div className="flex flex-col min-h-full items-center justify-center">
-        <h1 className="text-center mb-4">
-          Are you sure you want to delete <b>{siteInfo?.title}?</b>
-        </h1>
-        <div className="flex gap-2 justify-center">
-          <button className="btnRed" onClick={deleteSite}>
-            Yes
-          </button>
-          <button className="btnNeutral" onClick={cancel}>
-            No
-          </button>
+      {userRole === "admin" ? (
+        <div className="flex flex-col min-h-full items-center justify-center">
+          <h1 className="text-center mb-4">
+            Are you sure you want to delete <b>{siteInfo?.title}?</b>
+          </h1>
+          <div className="flex gap-2 justify-center">
+            <button className="btnRed" onClick={deleteSite}>
+              Yes
+            </button>
+            <button className="btnNeutral" onClick={cancel}>
+              No
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex flex-col min-h-full items-center justify-center">
+          <h1 className="text-center mb-4">
+            Demo user can't modify data, sorry!
+          </h1>
+        </div>
+      )}
     </Layout>
   );
 }
