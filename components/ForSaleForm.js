@@ -69,11 +69,11 @@ export default function ForSaleForm({
     console.log(data);
     // if project has ID = is existing project, update it
     if (_id) {
-      await axios.put("/api/saleApi", { ...data, _id });
+      await axios.put("saleApi", { ...data, _id });
     } else {
       // otherwise create new project
       await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales`,
         data
       );
     }
@@ -99,7 +99,7 @@ export default function ForSaleForm({
       }
 
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/image-upload`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}image-upload`,
         data
       );
       //setting existing images + new images via link that's returned when uploading
@@ -158,7 +158,7 @@ export default function ForSaleForm({
       }
 
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/image-upload`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}image-upload`,
         data
       );
       setApartments((prevApartments) =>

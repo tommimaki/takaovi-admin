@@ -57,12 +57,12 @@ export default function SiteForm({
     // if product has ID = is existing product, update it
     if (_id) {
       await axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${_id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites/${_id}`,
         data
       );
     } else {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites`,
         data
       );
     }
@@ -88,7 +88,7 @@ export default function SiteForm({
       }
 
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/image-upload`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}image-upload`,
         data
       );
       //setting existing images + new images via link that's returned when uploading

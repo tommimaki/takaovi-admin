@@ -20,7 +20,7 @@ export default function DeleteSalePage() {
       return;
     }
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales/${id}`)
       .then((response) => {
         setSaleInfo(response.data);
       });
@@ -33,7 +33,7 @@ export default function DeleteSalePage() {
   async function deleteSale() {
     console.log("deleting, ", id);
     await axios.delete(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales/${id}`
+      `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales/${id}`
     );
     router.push("/ForSale");
   }

@@ -7,7 +7,7 @@ export default function ForSaleProjects() {
   const [projects, setProjects] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales`)
       .then((response) => {
         setProjects(response.data);
       });

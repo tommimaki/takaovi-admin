@@ -15,7 +15,7 @@ export default function EditSalePage() {
       return;
     }
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sales/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales/${id}`)
       .then((response) => {
         setSaleInfo(response.data);
       });

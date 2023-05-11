@@ -20,7 +20,7 @@ export default function DeleteSitePage() {
       return;
     }
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites/${id}`)
       .then((response) => {
         setSiteInfo(response.data);
       });
@@ -33,7 +33,7 @@ export default function DeleteSitePage() {
   async function deleteSite() {
     console.log("deleting, ", id);
     await axios.delete(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${id}`
+      `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites/${id}`
     );
     router.push("/Sites");
   }

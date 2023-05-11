@@ -7,7 +7,7 @@ export default function Sites() {
   const [sites, setSites] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites`)
       .then((response) => {
         setSites(response.data);
       });

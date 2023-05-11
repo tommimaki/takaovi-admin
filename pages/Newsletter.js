@@ -8,7 +8,7 @@ export default function Newsletters() {
   const [userRole, setUserRole] = useState(null);
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/newsletter`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}newsletter`)
       .then((response) => {
         setLetters(response.data);
       });
@@ -38,7 +38,7 @@ export default function Newsletters() {
     }
     try {
       await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/newsletter/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}newsletter/${id}`
       );
       setLetters((prevLetters) =>
         prevLetters.filter((letter) => letter._id !== id)

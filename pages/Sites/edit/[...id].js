@@ -14,7 +14,7 @@ export default function EditSitePage() {
     }
     //get info for site by id
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/sites/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites/${id}`)
       .then((response) => {
         setSiteInfo(response.data);
       });

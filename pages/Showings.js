@@ -17,7 +17,7 @@ const VisitRequests = () => {
   async function fetchVisitRequests() {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/visit-requests`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}visit-requests`
       );
       setVisitRequests(response.data);
     } catch (error) {
@@ -28,7 +28,7 @@ const VisitRequests = () => {
   async function handleUpdateStatus(id, status) {
     try {
       await axios.patch(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/visit-requests/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}visit-requests/${id}`,
         { status }
       );
       fetchVisitRequests();
@@ -44,7 +44,7 @@ const VisitRequests = () => {
     }
     try {
       await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/visit-requests/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}visit-requests/${id}`
       );
       fetchVisitRequests();
     } catch (error) {
