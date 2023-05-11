@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.321.1",
+    "@netlify/plugin-nextjs": "^4.36.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "eslint": "8.39.0",
