@@ -18,7 +18,7 @@ const SignIn = () => {
   const fetchUserRole = async (uid) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/userRole/${uid}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/userRole/${uid}`
       );
       const { role } = response.data;
 
@@ -43,6 +43,23 @@ const SignIn = () => {
       const uid = userCredential.user.uid;
       await fetchUserRole(uid);
       // redirect to protected page
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleDemoSignIn = async (event) => {
+    event.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        "demo@mail.com",
+        "Demo1234"
+      );
+      const uid = userCredential.user.uid;
+      await fetchUserRole(uid);
     } catch (error) {
       setError(error.message);
     }
@@ -73,12 +90,13 @@ const SignIn = () => {
                     onChange={handleEmailChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
+                    autoComplete="current-email"
                     required=""
                   />
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Password
@@ -91,6 +109,7 @@ const SignIn = () => {
                     onChange={handlePasswordChange}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  "
+                    autoComplete="current-password"
                     required=""
                   />
                 </div>
@@ -121,6 +140,13 @@ const SignIn = () => {
                 >
                   Sign in
                 </button>
+                <button
+                  onClick={handleDemoSignIn}
+                  className="w-full mt-4 text-white bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                >
+                  Demo Sign in
+                </button>
+
                 <p className="text-sm font-light text-gray-500 ">
                   Don’t have an account? Contact admin Tommi to get one{" "}
                 </p>

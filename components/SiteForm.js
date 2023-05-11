@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Layout from "./Layout";
 import axios from "axios";
 import { useState, useEffect } from "react";
