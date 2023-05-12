@@ -18,7 +18,7 @@ const SignIn = () => {
   const fetchUserRole = async (uid) => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/api/userRole/${uid}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/userRole/${uid}`
       );
       const { role } = response.data;
 
