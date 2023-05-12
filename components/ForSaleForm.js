@@ -69,7 +69,10 @@ export default function ForSaleForm({
     console.log(data);
     // if project has ID = is existing project, update it
     if (_id) {
-      await axios.put("saleApi", { ...data, _id });
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales/${_id}`,
+        data
+      );
     } else {
       // otherwise create new project
       await axios.post(
