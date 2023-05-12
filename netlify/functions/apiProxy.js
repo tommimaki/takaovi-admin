@@ -1,18 +1,47 @@
 const axios = require("axios");
 
 exports.handler = async function (event, context) {
-  let { path, httpMethod, body } = event;
+  const { path, httpMethod, body } = event;
+  console.log("new function");
+  console.log("method", httpMethod);
+  console.log("body", body);
+  console.log("path", path);
 
-  path = path.replace("/.netlify/functions/apiProxy", "");
+  const apiPath = path.replace("/.netlify/functions/apiProxy", "");
+  const apiUrl = `http://16.170.141.178:3001/api${apiPath}`;
 
+  console.log("apipath", apiPath);
+  console.log("apiUrl", apiUrl);
   try {
-    console.log(path);
-    console.log(`http://16.170.141.178:3001/api/${path}`);
-    const response = await axios({
-      method: httpMethod,
-      url: `http://16.170.141.178:3001/api/${path}`,
-      data: body ? JSON.parse(body) : {},
-    });
+    let response;
+
+    if (httpMethod === "GET") {
+      response = await axios.get(apiUrl, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else if (httpMethod === "POST") {
+      response = await axios.post(apiUrl, JSON.parse(body), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else if (httpMethod === "PUT") {
+      response = await axios.put(apiUrl, JSON.parse(body), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else if (httpMethod === "PATCH") {
+      response = await axios.patch(apiUrl, JSON.parse(body), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else {
+      throw new Error(`Unsupported HTTP method: ${httpMethod}`);
+    }
 
     return {
       statusCode: 200,
