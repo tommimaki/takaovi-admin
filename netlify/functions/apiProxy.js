@@ -39,6 +39,12 @@ exports.handler = async function (event, context) {
           "Content-Type": "application/json",
         },
       });
+    } else if (httpMethod === "DELETE") {
+      response = await axios.delete(apiUrl, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } else {
       throw new Error(`Unsupported HTTP method: ${httpMethod}`);
     }
