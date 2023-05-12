@@ -1,15 +1,44 @@
 const axios = require("axios");
 
+const FormData = require("form-data");
+const Busboy = require("busboy");
+
+function parseMultipartForm(event) {
+  return new Promise((resolve) => {
+    const fields = { image: [] };
+    const bb = Busboy({ headers: event.headers });
+
+    bb.on("file", (name, file, info) => {
+      const { filename, mimeType } = info;
+
+      file.on("data", (data) => {
+        if (!fields[name]) fields[name] = [];
+
+        fields[name].push({
+          filename,
+          type: mimeType,
+          content: data,
+        });
+      });
+    });
+
+    bb.on("finish", () => {
+      resolve(fields);
+    });
+
+    bb.end(Buffer.from(event.body, "base64"));
+  });
+}
+
 exports.handler = async function (event, context) {
-  const { path, httpMethod, body } = event;
+  const { path, httpMethod, headers, body } = event;
   console.log("new function");
   console.log("method", httpMethod);
-  console.log("body", body);
+  // console.log("body", body);
   console.log("path", path);
 
   const apiPath = path.replace("/.netlify/functions/apiProxy", "");
-  const apiUrl = `http://16.170.141.178:3001/api${apiPath}`;
-
+  const apiUrl = `http://13.48.1.69:3001/api/${apiPath}`;
   console.log("apipath", apiPath);
   console.log("apiUrl", apiUrl);
   try {
@@ -22,11 +51,23 @@ exports.handler = async function (event, context) {
         },
       });
     } else if (httpMethod === "POST") {
-      response = await axios.post(apiUrl, JSON.parse(body), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      if (headers["content-type"].startsWith("multipart/form-data")) {
+        const fields = await parseMultipartForm(event);
+        console.log("Fields:", fields);
+        const file = fields.file[0];
+        const formData = new FormData();
+        formData.append("file", file.content, file.filename);
+
+        response = await axios.post(apiUrl, formData, {
+          headers: formData.getHeaders(),
+        });
+      } else {
+        response = await axios.post(apiUrl, JSON.parse(body), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
     } else if (httpMethod === "PUT") {
       response = await axios.put(apiUrl, JSON.parse(body), {
         headers: {
@@ -58,6 +99,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify(response.data),
     };
   } catch (error) {
+    console.error("Error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify(error),
