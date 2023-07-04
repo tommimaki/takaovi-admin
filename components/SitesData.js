@@ -24,10 +24,7 @@ export default function SitesData() {
 
   return (
     <div className="flex justify-center items-center flex-col relative overflow-x-auto shadow-lg sm:rounded-lg">
-      <h1 className="text-center my-4 text-lg ">
-        {" "}
-        Sites in construction at the moment{" "}
-      </h1>
+      <h1 className="text-center my-8 text-3xl "> Sites in construction </h1>
       <table className="basic mt-4">
         <thead>
           <tr>

@@ -25,7 +25,7 @@ export default function ForSaleProjects() {
   return (
     <Layout>
       <div className="flex justify-center items-center flex-col relative overflow-x-auto shadow-lg sm:rounded-lg">
-        <h1 className="text-center my-4 text-lg ">Buildings Constructed </h1>
+        <h1 className="my-8 text-center text-3xl ">For Sale </h1>
 
         <table className="basic">
           <thead>
@@ -71,7 +71,7 @@ export default function ForSaleProjects() {
           Add a new project
         </Link>
 
-        <h1 className="text-center my-4 text-lg ">Apartment details</h1>
+        <h1 className="my-8 text-center text-xl ">Apartment details</h1>
 
         <div
           className="overflow-y-scroll w-full"

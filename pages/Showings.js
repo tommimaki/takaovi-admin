@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "@/components/Layout";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const VisitRequests = () => {
   const [visitRequests, setVisitRequests] = useState([]);
   const [userRole, setUserRole] = useState(null);
+  const localizer = momentLocalizer(moment);
+
   useEffect(() => {
     fetchVisitRequests();
   }, []);
@@ -60,9 +65,12 @@ const VisitRequests = () => {
   }
   return (
     <Layout>
-      <div>
-        <h2 className="text-2xl mb-4">Visit Requests</h2>
-        <table className="basic">
+      <div className="flex flex-col gap-10">
+        <h2 className=" text-center text-3xl">Visit Requests</h2>
+        <table
+          className="mb-4 shadow-xl overflow-y-scroll"
+          style={{ maxHeight: "400px" }}
+        >
           <thead>
             <tr>
               <th>Name</th>
@@ -104,6 +112,21 @@ const VisitRequests = () => {
             ))}
           </tbody>
         </table>
+
+        <Calendar
+          localizer={localizer}
+          events={visitRequests.map((request) => {
+            return {
+              title: request.name,
+              start: new Date(new Date(request.date).toUTCString()),
+              end: new Date(new Date(request.date).toUTCString()),
+              allDay: true,
+            };
+          })}
+          startAccessor="start"
+          endAccessor="end"
+          defaultView="week"
+        />
       </div>
     </Layout>
   );

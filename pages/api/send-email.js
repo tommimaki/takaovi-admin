@@ -10,10 +10,10 @@ export default async function handler(req, res) {
       secure: true,
       auth: {
         type: "OAuth2",
-        user: process.env.EMAIL_USERNAME,
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
+        user: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
+        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+        clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+        refreshToken: process.env.NEXT_PUBLIC_REFRESH_TOKEN,
       },
     });
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       "\n\nThis email was sent from an automated system and was not written by me(T). Replies to this email are not monitored.";
 
     let mailOptions = {
-      from: process.env.EMAIL_USERNAME,
+      from: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
       to: recipients.join(", "),
       subject: subject,
       text: body + disclaimer,

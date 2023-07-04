@@ -51,8 +51,8 @@ const SignIn = () => {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        process.env.DEMO_EMAIL,
-        process.env.DEMO_PASS
+        process.env.NEXT_PUBLIC_DEMO_EMAIL,
+        process.env.NEXT_PUBLIC_DEMO_PASS
       );
       const uid = userCredential.user.uid;
       await fetchUserRole(uid);
