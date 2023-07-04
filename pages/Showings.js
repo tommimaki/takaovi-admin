@@ -114,6 +114,7 @@ const VisitRequests = () => {
         </table>
 
         <Calendar
+          style={{ minHeight: "400px" }}
           localizer={localizer}
           events={visitRequests.map((request) => {
             return {
@@ -125,7 +126,7 @@ const VisitRequests = () => {
           })}
           startAccessor="start"
           endAccessor="end"
-          defaultView="week"
+          defaultView="month"
         />
       </div>
     </Layout>
