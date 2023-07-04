@@ -2,9 +2,11 @@ import Layout from "@/components/Layout";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { DeleteIcon, EditIcon } from "@/assets/Icons";
 
 export default function ForSaleProjects() {
   const [projects, setProjects] = useState([]);
+
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sales`)
@@ -12,71 +14,99 @@ export default function ForSaleProjects() {
         setProjects(response.data);
       });
   }, []);
+
+  const apartments = projects.flatMap((project) =>
+    project.apartments.map((apartment) => ({
+      ...apartment,
+      projectTitle: project.title,
+    }))
+  );
+
   return (
     <Layout>
-      <Link className="linkAddButton" href={"/ForSale/NewForSale"}>
-        Add a new project
-      </Link>
-      <table className="basic mt-4">
-        <thead>
-          <tr>
-            <td>Project name</td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project) => (
-            <tr key={project.title}>
-              <td>{project.title}</td>
-              <td>
-                <div className="flex gap-4">
-                  <Link
-                    className="btnGreen"
-                    href={"/ForSale/edit/" + project._id}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                      />
-                    </svg>
-                    Edit
-                  </Link>
+      <div className="flex justify-center items-center flex-col relative overflow-x-auto shadow-lg sm:rounded-lg">
+        <h1 className="text-center my-4 text-lg ">
+          Buildings and apartments constructed and listed for sale{" "}
+        </h1>
 
-                  <Link
-                    className="btnRed"
-                    href={"/ForSale/delete/" + project._id}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                      />
-                    </svg>
-                    Delete
-                  </Link>
-                </div>
-              </td>
+        <table className="basic">
+          <thead>
+            <tr>
+              <th scope="col">Project Name</th>
+              <th scope="col">Number of Apartments</th>
+              <th scope="col">Available Apartments</th>
+              <th scope="col">Type of Building</th>
+              <th scope="col"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {projects.map((project, i) => (
+              <tr key={project._id}>
+                <td>{project.title}</td>
+                <td>{project.numberOfApartments}</td>
+                <td>{project.apartments.length}</td>
+                <td>{project.buildingType}</td>
+                <td>
+                  <div className="flex gap-4">
+                    <Link
+                      className="btnGreen"
+                      href={"/ForSale/edit/" + project._id}
+                    >
+                      <EditIcon />
+                      Edit
+                    </Link>
+                    <Link
+                      className="btnRed"
+                      href={"/ForSale/delete/" + project._id}
+                    >
+                      <DeleteIcon />
+                      Delete
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <Link className="btnGreen  mt-4 p-10" href={"/ForSale/NewForSale"}>
+          Add a new project
+        </Link>
+
+        <h1 className="text-center my-4 font-sans ">Apartment details</h1>
+
+        <table className="basic">
+          <thead>
+            <tr>
+              <th scope="col">Apartment Type</th>
+              <th scope="col">Building Name</th>
+              <th scope="col">Size</th>
+              <th scope="col">Price</th>
+              <th scope="col">Listing</th>
+            </tr>
+          </thead>
+          <tbody>
+            {apartments.map((apartment, i) => (
+              <tr key={i}>
+                <td>{apartment.description}</td>
+                <td>{apartment.projectTitle}</td>
+                <td>{apartment.area}m2</td>
+                <td>{apartment.sellingPrice}€</td>
+                <td>
+                  <Link
+                    href={`https://backdoor.netlify.app/apartment/${apartment._id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-700 hover:text-blue-300 font-extrabold underline "
+                  >
+                    View Listing
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Layout>
   );
 }

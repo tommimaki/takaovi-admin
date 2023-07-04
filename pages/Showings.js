@@ -62,39 +62,25 @@ const VisitRequests = () => {
     <Layout>
       <div>
         <h2 className="text-2xl mb-4">Visit Requests</h2>
-        <table className="w-full text-left border-collapse">
+        <table className="basic">
           <thead>
             <tr>
-              <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                Name
-              </th>
-              <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                Email
-              </th>
-              <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                Phone
-              </th>
-              <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                Date
-              </th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Date</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {visitRequests.map((request) => (
               <tr key={request._id} className="hover:bg-grey-lightest">
-                <td className="py-4 px-6 border-b border-grey-light">
-                  {request.name}
-                </td>
-                <td className="py-4 px-6 border-b border-grey-light">
-                  {request.email}
-                </td>
-                <td className="py-4 px-6 border-b border-grey-light">
-                  {request.phone}
-                </td>
-                <td className="py-4 px-6 border-b border-grey-light">
-                  {formatDate(request.date)}
-                </td>
-                <td className="py-4 px-6 border-b border-grey-light">
+                <td>{request.name}</td>
+                <td>{request.email}</td>
+                <td>{request.phone}</td>
+                <td>{formatDate(request.date)}</td>
+                <td>
                   <select
                     value={request.status}
                     onChange={(e) =>
@@ -106,9 +92,9 @@ const VisitRequests = () => {
                     <option value="declined">Declined</option>
                   </select>
                 </td>
-                <td className="py-4 px-6 border-b border-grey-light">
+                <td>
                   <button
-                    className="bg-red-500 text-white py-2 px-4 rounded"
+                    className="btnRed"
                     onClick={() => handleDelete(request._id)}
                   >
                     Delete

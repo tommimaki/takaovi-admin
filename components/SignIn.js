@@ -21,8 +21,6 @@ const SignIn = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/userRole/${uid}`
       );
       const { role } = response.data;
-
-      // You can save the role to the local storage or use a context to share it across components
       localStorage.setItem("userRole", role);
     } catch (error) {
       console.error("Error fetching user role:", error);
@@ -34,7 +32,6 @@ const SignIn = () => {
 
     try {
       const auth = getAuth();
-      // await signInWithEmailAndPassword(auth, email, password);
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -42,7 +39,6 @@ const SignIn = () => {
       );
       const uid = userCredential.user.uid;
       await fetchUserRole(uid);
-      // redirect to protected page
     } catch (error) {
       setError(error.message);
     }

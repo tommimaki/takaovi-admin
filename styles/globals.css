@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,29 +13,37 @@ textarea {
 } */
 
 .linkAddButton {
-  @apply bg-green-600 text-white p-2 border-2 shadow-md border-green-900 rounded-md;
+  @apply bg-green-600 text-white p-2 border-2 shadow-md font-bold border-green-900 rounded-md;
 }
-h1 {
-  @apply text-green-900 text-xl;
-}
+
 label {
   @apply text-green-950;
 }
 
-table.basic {
-  @apply w-full;
-}
-table.basic thead {
-  @apply bg-green-300 text-xl;
+/* Table Styles */
+table {
+  @apply w-full text-sm text-left text-gray-600;
 }
 
-table.basic tr td {
-  @apply border border-green-700 p-2 mt-10;
+table thead {
+  @apply text-xs text-gray-700 uppercase;
 }
-/* 
-table.basic a {
-  @apply bg-green-400 p-2 border border-green-950 rounded-lg inline-flex gap-1 mr-1;
-} */
+
+table tr {
+  @apply bg-white border-b;
+}
+th {
+  @apply bg-green-100 font-bold;
+}
+
+table tr td,
+table tr th {
+  @apply px-6  py-4;
+}
+
+table tr th {
+  @apply text-gray-900  whitespace-nowrap;
+}
 
 .btnGreen,
 .btnRed,
@@ -41,10 +51,10 @@ table.basic a {
   @apply text-white  px-4 py-1 font-bold border border-green-950 rounded-lg shadow-lg inline-flex gap-1;
 }
 .btnGreen {
-  @apply bg-green-600;
+  @apply bg-green-600 max-w-xs text-center mb-6;
 }
 .btnRed {
-  @apply bg-red-600;
+  @apply bg-red-600 max-w-xs text-center mb-6;
 }
 .btnNeutral {
   @apply bg-gray-600;
