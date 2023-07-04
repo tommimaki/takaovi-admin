@@ -25,9 +25,7 @@ export default function ForSaleProjects() {
   return (
     <Layout>
       <div className="flex justify-center items-center flex-col relative overflow-x-auto shadow-lg sm:rounded-lg">
-        <h1 className="text-center my-4 text-lg ">
-          Buildings and apartments constructed and listed for sale{" "}
-        </h1>
+        <h1 className="text-center my-4 text-lg ">Buildings Constructed </h1>
 
         <table className="basic">
           <thead>
@@ -47,7 +45,7 @@ export default function ForSaleProjects() {
                 <td>{project.apartments.length}</td>
                 <td>{project.buildingType}</td>
                 <td>
-                  <div className="flex gap-4">
+                  <div className="flex justify-center align-center  gap-4">
                     <Link
                       className="btnGreen"
                       href={"/ForSale/edit/" + project._id}
@@ -73,11 +71,12 @@ export default function ForSaleProjects() {
           Add a new project
         </Link>
 
-        <h1 className="text-center my-4 font-sans ">Apartment details</h1>
+        <h1 className="text-center my-4 text-lg ">Apartment details</h1>
 
         <table className="basic">
           <thead>
             <tr>
+              <th scope="col">Apartment number</th>
               <th scope="col">Apartment Type</th>
               <th scope="col">Building Name</th>
               <th scope="col">Size</th>
@@ -88,6 +87,7 @@ export default function ForSaleProjects() {
           <tbody>
             {apartments.map((apartment, i) => (
               <tr key={i}>
+                <td>{apartment.title}</td>
                 <td>{apartment.description}</td>
                 <td>{apartment.projectTitle}</td>
                 <td>{apartment.area}m2</td>

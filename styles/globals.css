@@ -33,7 +33,7 @@ table tr {
   @apply bg-white border-b;
 }
 th {
-  @apply bg-green-100 font-bold;
+  @apply bg-green-100  font-bold;
 }
 
 table tr td,
@@ -51,10 +51,10 @@ table tr th {
   @apply text-white  px-4 py-1 font-bold border border-green-950 rounded-lg shadow-lg inline-flex gap-1;
 }
 .btnGreen {
-  @apply bg-green-600 max-w-xs text-center mb-6;
+  @apply bg-green-500 text-white rounded-lg p-2 hover:bg-green-700;
 }
 .btnRed {
-  @apply bg-red-600 max-w-xs text-center mb-6;
+  @apply bg-red-600 max-w-xs text-center;
 }
 .btnNeutral {
   @apply bg-gray-600;
