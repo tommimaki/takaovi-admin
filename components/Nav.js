@@ -20,7 +20,7 @@ export default function Nav() {
 
   return (
     <aside className="text-white p-4 pr-0">
-      <Link href={"/"} className="flex gap-2 my-4">
+      {/* <Link href={"/"} className="flex gap-2 my-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -36,7 +36,7 @@ export default function Nav() {
           />
         </svg>
         <span className=""> Takaovi </span>
-      </Link>
+      </Link> */}
       <nav className="flex flex-col gap-4">
         <Link
           className={

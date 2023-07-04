@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Snackbar from "@/components/Snackbar";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,6 +10,8 @@ export default function Newsletters() {
   const [userRole, setUserRole] = useState(null);
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
+  const [snackbar, setSnackbar] = useState({});
+  const [newEmail, setNewEmail] = useState("");
 
   useEffect(() => {
     axios
@@ -33,6 +36,26 @@ export default function Newsletters() {
         console.error("Could not copy email addresses: ", err);
       }
     );
+  };
+
+  const handleNewEmailSubmit = async (e) => {
+    e.preventDefault();
+
+    if (userRole !== "admin") {
+      alert("Demo users can't add data.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}newsletter/subscribe`,
+        { email: newEmail }
+      );
+      setLetters((prevLetters) => [...prevLetters, response.data]);
+      setNewEmail("");
+    } catch (error) {
+      console.error("Error adding email:", error);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -68,11 +91,19 @@ export default function Newsletters() {
       .post("/api/send-email", emailData)
       .then((response) => {
         console.log("Email sent successfully");
-        // Handle success case
+        setSnackbar({
+          message: "Email sent successfully!",
+          type: "success",
+        });
+        setTimeout(() => setSnackbar({}), 3000);
       })
       .catch((error) => {
         console.error("Error sending email:", error);
-        // Handle error case
+        setSnackbar({
+          message: "Error sending email.",
+          type: "error",
+        });
+        setTimeout(() => setSnackbar({}), 3000);
       });
 
     setEmailSubject("");
@@ -81,40 +112,79 @@ export default function Newsletters() {
 
   return (
     <Layout>
-      <h1 className="mb-4 text-center text-lg">Newsletter</h1>
-      <button onClick={copyEmails} className="btnGreen">
-        Copy All Addresses
-      </button>
-      <table className="basic">
-        <thead>
-          <tr>
-            <th>Newsletter subscribers</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {letters.map((letter) => (
-            <tr key={letter._id}>
-              <td>{letter.email}</td>
-              <td>
-                <div className="flex gap-4">
-                  <button
-                    className="btnRed"
-                    onClick={() => handleDelete(letter._id)}
-                  >
-                    <DeleteIcon />
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="flex flex-col w-full p-4 md:w-2/3 lg:w-1/2 mx-auto bg-white rounded-xl shadow-md space-y-4">
+      {snackbar.message && (
+        <Snackbar message={snackbar.message} type={snackbar.type} />
+      )}
+      <h1 className="mb-10 text-center text-3xl">Newsletter manager</h1>
+
+      <div className="flex  items-stretch flex-wrap">
+        <div className="w-2/3 shadow-xl">
+          <table>
+            <thead>
+              <tr>
+                <th>Newsletter subscribers</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {letters.map((letter) => (
+                <tr key={letter._id}>
+                  <td>{letter.email}</td>
+                  <td>
+                    <div className="flex gap-4">
+                      <button
+                        className="btnRed"
+                        onClick={() => handleDelete(letter._id)}
+                      >
+                        <DeleteIcon />
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="flex flex-col w-1/3 self-stretch shadow-md ">
+          <form
+            className="flex flex-col mt-4 p-10  space-y-4"
+            onSubmit={handleNewEmailSubmit}
+          >
+            <label
+              htmlFor="newEmail"
+              className="font-bold text-lg text-green-500"
+            >
+              Add new Email to mailing list:
+            </label>
+            <input
+              type="email"
+              id="newEmail"
+              name="newEmail"
+              placeholder="Enter new email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              required
+              className="rounded-lg px-4 py-2 shadow-inner border border-green-300 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
+            />
+
+            <button
+              type="submit"
+              className="py-2 px-4 rounded-full text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg"
+            >
+              Add Email
+            </button>
+          </form>
+          <button onClick={copyEmails} className="mx-10 btnNeutral ">
+            Copy All Addresses
+          </button>
+        </div>
+      </div>
+      <div className="flex mt-4 flex-col w-full p-4  bg-white rounded-xl shadow-md space-y-4">
         <h2 className="text-2xl font-bold text-center text-green-500">
           {" "}
-          Send an Email to subscribed users
+          Send an Email to mailing list
         </h2>
         <form className="flex flex-col space-y-4" onSubmit={handleEmailSubmit}>
           <label htmlFor="subject" className="font-bold text-lg text-green-500">

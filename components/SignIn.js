@@ -51,8 +51,8 @@ const SignIn = () => {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        "demo@mail.com",
-        "Demo1234"
+        process.env.DEMO_EMAIL,
+        process.env.DEMO_PASS
       );
       const uid = userCredential.user.uid;
       await fetchUserRole(uid);
@@ -63,7 +63,7 @@ const SignIn = () => {
 
   return (
     <div className="wrapper bg-green-500 w-full min-h-screen">
-      <section className=" ">
+      <section>
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

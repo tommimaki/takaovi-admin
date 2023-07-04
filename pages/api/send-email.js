@@ -17,11 +17,14 @@ export default async function handler(req, res) {
       },
     });
 
+    const disclaimer =
+      "\n\nThis email was sent from an automated system and was not written by me(T). Replies to this email are not monitored.";
+
     let mailOptions = {
       from: process.env.EMAIL_USERNAME,
       to: recipients.join(", "),
       subject: subject,
-      text: body,
+      text: body + disclaimer,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

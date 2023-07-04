@@ -45,19 +45,20 @@ table tr th {
   @apply text-gray-900  whitespace-nowrap;
 }
 
+/* BUTTON STYLES */
 .btnGreen,
 .btnRed,
 .btnNeutral {
-  @apply text-white  px-4 py-1 font-bold border border-green-950 rounded-lg shadow-lg inline-flex gap-1;
+  @apply py-2 px-4 rounded-full text-white text-center focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-lg font-bold;
 }
 .btnGreen {
-  @apply bg-green-500 text-white rounded-lg p-2 hover:bg-green-700;
+  @apply py-2 px-4 rounded-full text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg flex align-middle justify-center gap-2;
 }
 .btnRed {
-  @apply bg-red-600 max-w-xs text-center;
+  @apply bg-red-600 hover:bg-red-400 focus:ring-red-800 flex align-middle justify-center gap-2;
 }
 .btnNeutral {
-  @apply bg-gray-600;
+  @apply bg-gray-600 hover:bg-gray-400 focus:ring-gray-800;
 }
 
 img {
