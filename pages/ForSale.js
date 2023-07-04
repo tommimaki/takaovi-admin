@@ -73,39 +73,44 @@ export default function ForSaleProjects() {
 
         <h1 className="text-center my-4 text-lg ">Apartment details</h1>
 
-        <table className="basic">
-          <thead>
-            <tr>
-              <th scope="col">Apartment number</th>
-              <th scope="col">Apartment Type</th>
-              <th scope="col">Building Name</th>
-              <th scope="col">Size</th>
-              <th scope="col">Price</th>
-              <th scope="col">Listing</th>
-            </tr>
-          </thead>
-          <tbody>
-            {apartments.map((apartment, i) => (
-              <tr key={i}>
-                <td>{apartment.title}</td>
-                <td>{apartment.description}</td>
-                <td>{apartment.projectTitle}</td>
-                <td>{apartment.area}m2</td>
-                <td>{apartment.sellingPrice}€</td>
-                <td>
-                  <Link
-                    href={`https://backdoor.netlify.app/apartment/${apartment._id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-700 hover:text-blue-300 font-extrabold underline "
-                  >
-                    View Listing
-                  </Link>
-                </td>
+        <div
+          className="overflow-y-scroll w-full"
+          style={{ maxHeight: "400px" }}
+        >
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Apartment number</th>
+                <th scope="col">Apartment Type</th>
+                <th scope="col">Building Name</th>
+                <th scope="col">Size</th>
+                <th scope="col">Price</th>
+                <th scope="col">Listing</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {apartments.map((apartment, i) => (
+                <tr key={i}>
+                  <td>{apartment.title}</td>
+                  <td>{apartment.description}</td>
+                  <td>{apartment.projectTitle}</td>
+                  <td>{apartment.area}m2</td>
+                  <td>{apartment.sellingPrice}€</td>
+                  <td>
+                    <Link
+                      href={`https://backdoor.netlify.app/apartment/${apartment._id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-green-700 hover:text-blue-300 font-extrabold underline "
+                    >
+                      View Listing
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );

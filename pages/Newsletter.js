@@ -118,7 +118,10 @@ export default function Newsletters() {
       <h1 className="mb-10 text-center text-3xl">Newsletter manager</h1>
 
       <div className="flex  items-stretch flex-wrap">
-        <div className="w-2/3 shadow-xl">
+        <div
+          className="w-2/3 shadow-xl overflow-y-scroll"
+          style={{ maxHeight: "400px" }}
+        >
           <table>
             <thead>
               <tr>
@@ -147,9 +150,9 @@ export default function Newsletters() {
           </table>
         </div>
 
-        <div className="flex flex-col w-1/3 self-stretch shadow-md ">
+        <div className="flex flex-col w-1/3  self-stretch  ">
           <form
-            className="flex flex-col mt-4 p-10  space-y-4"
+            className="flex flex-col mt-1  mx-auto space-y-4"
             onSubmit={handleNewEmailSubmit}
           >
             <label
@@ -169,15 +172,12 @@ export default function Newsletters() {
               className="rounded-lg px-4 py-2 shadow-inner border border-green-300 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
             />
 
-            <button
-              type="submit"
-              className="py-2 px-4 rounded-full text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg"
-            >
+            <button type="submit" className="btnGreen">
               Add Email
             </button>
           </form>
-          <button onClick={copyEmails} className="mx-10 btnNeutral ">
-            Copy All Addresses
+          <button onClick={copyEmails} className=" mx-auto mt-2 btnNeutral ">
+            Copy All Addresses in list
           </button>
         </div>
       </div>

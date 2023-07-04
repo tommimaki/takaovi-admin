@@ -12,7 +12,7 @@ export default function EditSitePage() {
     if (!id) {
       return;
     }
-    //get info for site by id
+    //getting info for site by id
     axios
       .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites/${id}`)
       .then((response) => {
@@ -23,7 +23,6 @@ export default function EditSitePage() {
   return (
     <Layout>
       <h1 className="mb-4">Edit The Site</h1>
-      {/* pass the info to the form with conditional rendering */}
       {siteInfo && <SiteForm {...siteInfo} />}
     </Layout>
   );

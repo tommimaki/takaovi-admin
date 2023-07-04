@@ -15,7 +15,7 @@ export default function SiteForm({
   finishingDate: currentFinishingDate,
   images: existingImages,
 }) {
-  //in edit view set the const values to existing ones, else empty
+  //in edit view setting the const values to existing ones, otherwise empty
   const [title, setTitle] = useState(currentTitle || "");
   const [description, setDescription] = useState(currentDescription || "");
   const [goToSites, setGoToSites] = useState(false);
@@ -66,7 +66,6 @@ export default function SiteForm({
         data
       );
     }
-
     setGoToSites(true);
   }
 
@@ -205,7 +204,7 @@ export default function SiteForm({
             value={finishingDate}
             onChange={(ev) => setFinishingDate(ev.target.value)}
           ></input>
-          <button type="submit" className="linkAddButton">
+          <button type="submit" className="btnGreen">
             save
           </button>
         </div>
