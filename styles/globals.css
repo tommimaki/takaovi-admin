@@ -52,7 +52,7 @@ table tr th {
   @apply py-2 px-4 rounded-full text-white text-center focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-lg font-bold;
 }
 .btnGreen {
-  @apply py-2 px-4 rounded-full text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg flex align-middle justify-center gap-2;
+  @apply py-2 px-4  text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg flex align-middle justify-center gap-2;
 }
 .btnRed {
   @apply bg-red-600 hover:bg-red-400 focus:ring-red-800 flex align-middle justify-center gap-2;

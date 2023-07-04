@@ -22,7 +22,7 @@ export default function EditSitePage() {
 
   return (
     <Layout>
-      <h1 className="mb-4">Edit The Site</h1>
+      <h1 className="mb-4 text-center text-2xl">Edit The Site</h1>
       {siteInfo && <SiteForm {...siteInfo} />}
     </Layout>
   );

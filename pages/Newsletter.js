@@ -155,10 +155,7 @@ export default function Newsletters() {
             className="flex flex-col mt-1  mx-auto space-y-4"
             onSubmit={handleNewEmailSubmit}
           >
-            <label
-              htmlFor="newEmail"
-              className="font-bold text-lg text-green-500"
-            >
+            <label htmlFor="newEmail" className="font-bold text-lg">
               Add new Email to mailing list:
             </label>
             <input
@@ -172,17 +169,23 @@ export default function Newsletters() {
               className="rounded-lg px-4 py-2 shadow-inner border border-green-300 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none"
             />
 
-            <button type="submit" className="btnGreen">
+            <button type="submit" className="btnGreen w-full">
               Add Email
             </button>
           </form>
-          <button onClick={copyEmails} className=" mx-auto mt-2 btnNeutral ">
-            Copy All Addresses in list
-          </button>
+
+          <div className="mx-auto">
+            <button
+              onClick={copyEmails}
+              className="mt-2 rounded-full bg-gray-600 hover:bg-gray-400 focus:ring-gray-800 text-white  w-full px-7 py-2"
+            >
+              Copy All Addresses in list
+            </button>
+          </div>
         </div>
       </div>
       <div className="flex mt-4 flex-col w-full p-4  bg-white rounded-xl shadow-md space-y-4">
-        <h2 className="text-2xl font-bold text-center text-green-500">
+        <h2 className="text-2xl font-bold text-center ">
           {" "}
           Send an Email to mailing list
         </h2>

@@ -63,6 +63,30 @@ const VisitRequests = () => {
       parsedDate.getMonth() + 1
     }/${parsedDate.getFullYear()}`;
   }
+
+  // function to set colorcoding for table
+  function getStatusColor(status) {
+    switch (status) {
+      case "accepted":
+        return "bg-green-400 text-black ";
+      case "declined":
+        return "bg-red-200 text-black";
+      default:
+        return "bg-gray-200 text-black";
+    }
+  }
+  // function for setting color code to Calendar
+  function getCalendarColor(status) {
+    switch (status) {
+      case "accepted":
+        return "#68D391";
+      case "declined":
+        return "#FC8181";
+      default:
+        return "#CBD5E0";
+    }
+  }
+
   return (
     <Layout>
       <div className="flex flex-col gap-10">
@@ -90,6 +114,9 @@ const VisitRequests = () => {
                 <td>{formatDate(request.date)}</td>
                 <td>
                   <select
+                    className={`rounded-md p-1 ${getStatusColor(
+                      request.status
+                    )}`}
                     value={request.status}
                     onChange={(e) =>
                       handleUpdateStatus(request._id, e.target.value)
@@ -122,11 +149,15 @@ const VisitRequests = () => {
               start: new Date(new Date(request.date).toUTCString()),
               end: new Date(new Date(request.date).toUTCString()),
               allDay: true,
+              color: getCalendarColor(request.status),
             };
           })}
           startAccessor="start"
           endAccessor="end"
           defaultView="month"
+          eventPropGetter={(event) => ({
+            style: { backgroundColor: event.color, color: "#000" },
+          })}
         />
       </div>
     </Layout>
