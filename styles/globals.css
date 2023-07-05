@@ -68,3 +68,7 @@ img {
 .grid-container {
   grid-template-rows: 1fr 0.5fr 0.5fr;
 }
+svg {
+  width: 24px;
+  height: 24px;
+}
