@@ -46,30 +46,12 @@ export default function Sites() {
                 <td>
                   <div className="flex gap-4">
                     <Link className="btnGreen" href={"/Sites/edit/" + site._id}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <EditIcon />
-                      </svg>
+                      <EditIcon />
                       Edit
                     </Link>
 
                     <Link className="btnRed" href={"/Sites/delete/" + site._id}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <DeleteIcon />
-                      </svg>
+                      <DeleteIcon />
                       Delete
                     </Link>
                   </div>
