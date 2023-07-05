@@ -10,6 +10,7 @@ const ConstructionSitesData = () => {
       .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}sites`)
       .then((response) => {
         setConstructionSites(response.data);
+        console.log(response.data);
       });
   }, []);
 

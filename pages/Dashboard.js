@@ -30,21 +30,20 @@ export default function Dashboard() {
           )}
         </div>
         <div className="flex flex-1 overflow-hidden">
-          <h1> in progress</h1>
-          <div className="grid grid-cols-2 grid-rows-2 gap-4 h-full">
-            <div className="col-span-1 row-span-1 flex items-stretch">
+          <div className="grid grid-cols-2 grid-rows-2 border-2 gap-4 h-full w-full">
+            <div className="col-span-1 row-span-1 flex border-2 flex-grow items-stretch">
               <h2 className="text-lg font-semibold">Construction Sites</h2>
               <ConstructionSitesData />
             </div>
-            <div className="col-span-1 row-span-1 flex items-stretch">
+            <div className="col-span-1 row-span-1 flex flex-grow border-2 items-stretch">
               <h2 className="text-lg font-semibold">For Sale</h2>
               <ForSaleData />
             </div>
-            <div className="col-span-1 row-span-1 flex items-stretch">
+            <div className="col-span-1 row-span-1 flex flex-grow border-2 items-stretch">
               <h2 className="text-lg font-semibold">Newsletter</h2>
               <NewsletterData />
             </div>
-            <div className="col-span-1 row-span-1 flex items-stretch">
+            <div className="col-span-1 row-span-1 flex flex-grow border-2 items-stretch">
               <h2 className="text-lg font-semibold">Showings</h2>
               <ShowingsData />
             </div>
