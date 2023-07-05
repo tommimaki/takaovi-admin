@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-
+import { MailIcon } from "@/assets/Icons";
 const NewsletterData = () => {
   const [newsletterData, setNewsletterData] = useState([]);
 
@@ -25,7 +25,10 @@ const NewsletterData = () => {
           Current subscribers: <b>{newsletterData.length}</b>
         </h3>
         <Link href="/Newsletter">
-          <button className="btnNeutral mr-4">Manage Newsletter</button>
+          <button className="btnNeutral flex gap-2 mr-4">
+            Manage Newsletter
+            <MailIcon />
+          </button>
         </Link>
       </div>
     </div>

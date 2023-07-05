@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import ProjectsCarousel from "../ProjectCarousel";
+import { SaleIcon } from "@/assets/Icons";
 
 const ForSaleData = () => {
   const [forSaleData, setForSaleData] = useState([]);
@@ -18,7 +19,7 @@ const ForSaleData = () => {
   }, []);
 
   const totalApartmentsForSale = forSaleData.reduce((sum, item) => {
-    // Checking if the 'apartments' property exists and is an array, then counting total lenghts
+    // Checking if the 'apartments' property exists and is an array, then counting total lengths
     const numApartments = Array.isArray(item.apartments)
       ? item.apartments.length
       : 0;
@@ -40,7 +41,9 @@ const ForSaleData = () => {
         </div>
         <div className="flex justify-end">
           <Link href={"/ForSale"}>
-            <button className="btnNeutral m-4">View All For Sale</button>
+            <button className="btnNeutral flex gap-2 m-4">
+              Manage Sales <SaleIcon />
+            </button>
           </Link>
         </div>
       </div>

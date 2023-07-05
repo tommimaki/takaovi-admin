@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-
+import { CalendarIcon } from "@/assets/Icons";
 const ShowingsData = () => {
   const [showingsData, setShowingsData] = useState([]);
 
@@ -25,7 +25,7 @@ const ShowingsData = () => {
     (item) => item.status === "pending"
   ).length;
   const rejectedShowings = showingsData.filter(
-    (item) => item.status === "rejected"
+    (item) => item.status === "declined"
   ).length;
 
   return (
@@ -50,7 +50,11 @@ const ShowingsData = () => {
 
         <Link href="/Showings">
           {" "}
-          <button className="btnNeutral m-4">Manage Requests</button>
+          <div>
+            <button className="btnNeutral m-4 flex gap-2">
+              Manage Requests <CalendarIcon />
+            </button>
+          </div>
         </Link>
       </div>
     </div>

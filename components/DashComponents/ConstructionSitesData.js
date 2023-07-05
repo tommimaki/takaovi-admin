@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import ProjectsCarousel from "../ProjectCarousel";
-
+import { ToolIcon } from "@/assets/Icons";
 const ConstructionSitesData = () => {
   const [constructionSites, setConstructionSites] = useState([]);
 
@@ -35,7 +35,10 @@ const ConstructionSitesData = () => {
           </p>
         </div>
         <Link href={"/Sites"}>
-          <button className="btnNeutral m-4 "> To sites</button>
+          <button className="btnNeutral flex gap-2 m-4 ">
+            {" "}
+            Manage Sites <ToolIcon />
+          </button>
         </Link>
       </div>
       <ProjectsCarousel projects={constructionSites} />
