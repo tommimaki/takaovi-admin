@@ -17,17 +17,17 @@ const NewsletterData = () => {
   }, []);
 
   return (
-    <div>
-      <h2 className="text-lg font-semibold">Newsletter</h2>
-      {/* Render the Newsletter data */}
-      {newsletterData.map((item) => (
-        <div key={item.id}>
-          <p>{item.title}</p>
-          {/* Add more properties to display as needed */}
-        </div>
-      ))}
-      {/* Link to the corresponding site */}
-      <Link href="/Newsletter">View All Newsletters</Link>
+    <div className="w-full">
+      <h1 className="text-center text-xl my-4 font-bold">Newsletters</h1>
+      <hr></hr>
+      <div className="flex justify-around mt-4 align-middle">
+        <h3>
+          Current subscribers: <b>{newsletterData.length}</b>
+        </h3>
+        <Link href="/Newsletter">
+          <button className="btnNeutral mr-4">Manage Newsletter</button>
+        </Link>
+      </div>
     </div>
   );
 };

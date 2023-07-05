@@ -101,7 +101,7 @@ export default function ForSaleProjects() {
                       href={`https://backdoor.netlify.app/apartment/${apartment._id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-700 hover:text-blue-300 font-extrabold underline "
+                      className="text-green-700 hover:text-blue-300 font-extrabold underline"
                     >
                       View Listing
                     </Link>

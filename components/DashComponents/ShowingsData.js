@@ -7,7 +7,7 @@ const ShowingsData = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}showings`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}visit-requests`)
       .then((response) => {
         setShowingsData(response.data);
       })
@@ -16,18 +16,43 @@ const ShowingsData = () => {
       });
   }, []);
 
+  const totalShowings = showingsData.length;
+
+  const acceptedShowings = showingsData.filter(
+    (item) => item.status === "accepted"
+  ).length;
+  const pendingShowings = showingsData.filter(
+    (item) => item.status === "pending"
+  ).length;
+  const rejectedShowings = showingsData.filter(
+    (item) => item.status === "rejected"
+  ).length;
+
   return (
-    <div>
-      <h2 className="text-lg font-semibold">Showings</h2>
-      {/* Render the Showings data */}
-      {showingsData.map((item) => (
-        <div key={item.id}>
-          <p>{item.title}</p>
-          {/* Add more properties to display as needed */}
+    <div className="flex flex-col w-full">
+      <h2 className="text-center text-xl my-4 font-bold">Showings</h2>
+      <hr></hr>
+      <div className="flex justify-around">
+        <div className="mt-4">
+          <p>
+            Accepted showings: <b>{acceptedShowings}</b>
+          </p>
+          <p>
+            Pending showings: <b>{pendingShowings}</b>
+          </p>
+          <p>
+            Rejected showings: <b>{rejectedShowings}</b>
+          </p>
+          <p className="mt-4">
+            Total: <b>{totalShowings}</b>
+          </p>
         </div>
-      ))}
-      {/* Link to the corresponding site */}
-      <Link href="/Showings">View All Showings</Link>
+
+        <Link href="/Showings">
+          {" "}
+          <button className="btnNeutral m-4">Manage Requests</button>
+        </Link>
+      </div>
     </div>
   );
 };

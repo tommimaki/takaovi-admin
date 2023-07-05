@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import Snackbar from "@/components/Snackbar";
 import axios from "axios";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { DeleteIcon } from "@/assets/Icons";
 
@@ -90,7 +89,7 @@ export default function Newsletters() {
     axios
       .post("/api/send-email", emailData)
       .then((response) => {
-        console.log("Email sent successfully");
+        console.log("Email sent successfully", response);
         setSnackbar({
           message: "Email sent successfully!",
           type: "success",
